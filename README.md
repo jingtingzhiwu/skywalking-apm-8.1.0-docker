@@ -58,4 +58,19 @@ services:
       - /etc/localtime:/etc/localtime:ro
 ```
 
+# elasticsearch.yml
+
+```
+cluster.name: "docker-cluster"
+network.host: 0.0.0.0
+
+# minimum_master_nodes need to be explicitly set when bound on a public IP
+# # set to 1 to allow single node clusters
+# # Details: https://github.com/elastic/elasticsearch/pull/17288
+discovery.zen.minimum_master_nodes: 1
+
+thread_pool.index.queue_size: 500
+thread_pool.write.queue_size: 500
+```
+
 docker run -p 9301:9301 registry.cn-shenzhen.aliyuncs.com/wilkey/test
